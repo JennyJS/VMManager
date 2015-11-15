@@ -1,17 +1,25 @@
 /**
  * Created by jenny on 11/14/15.
  */
-public class TaskGenerator implements Runnable{
+public class TaskGenerator implements Runnable {
+    private final int taskNum;
+
+    public TaskGenerator(int taskNum) {
+        this.taskNum = taskNum;
+    }
+
     @Override
     public void run() {
-        while (true){
+        int taskID = 0;
+        while (taskID < taskNum) {
             try {
-                Thread.sleep(4000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Task t = new Task();
+            Task t = new Task(10, Task.TaskType.NonIOTask, taskID++, 1);
             TaskQueue.getInstance().addTask(t);
+            System.out.println(t);
         }
 
     }
