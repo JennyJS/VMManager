@@ -13,14 +13,13 @@ public class TaskGenerator implements Runnable {
         int taskID = 0;
         while (taskID < taskNum) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             Task t = new Task(10, Task.TaskType.NonIOTask, taskID++, 1);
             TaskQueue.getInstance().addTask(t);
-            System.out.println(t);
+            System.out.println("Generating..." + t);
         }
-
     }
 }
