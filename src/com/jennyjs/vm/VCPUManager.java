@@ -12,7 +12,7 @@ public class VCPUManager extends Thread {
 
     public enum ScheduleType {
         MRG,
-        CREDIT;
+        CREDIT
     }
 
     private static VCPUManager vcpuManager;
@@ -43,7 +43,7 @@ public class VCPUManager extends Thread {
                 }
 
             } catch (InterruptedException e){
-                System.out.print(e.getStackTrace());
+                System.out.print(e.getMessage());
             }
         }
     }

@@ -1,8 +1,5 @@
 package com.jennyjs.vm;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 /**
  * Created by jenny on 11/14/15.
  */
@@ -17,7 +14,9 @@ public class Main {
         }
         VCPUManager.getInstance(VCPUManager.ScheduleType.MRG).start();
 
-
+        for (int j = 0; j < 5; j++){
+            PCPUManager.getInstance().addPCUP(new PhysicalCPU(j, PhysicalCPU.Status.idle));
+        }
         // allocate the vCPUs in the runQueue to the idle pCPUs
         PCPUManager.getInstance().run();
     }

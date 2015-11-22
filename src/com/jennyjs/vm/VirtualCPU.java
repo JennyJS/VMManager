@@ -10,7 +10,7 @@ public class VirtualCPU {
     int weight;
     int cap;
     public Priority p;
-    private Task task;
+    public Task task;
 
     public enum Priority{    //Is it the priority of VMs same as priority of vCPUs
         idle (0),

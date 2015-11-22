@@ -25,8 +25,8 @@ public class Scheduler {
         this.runQueue.add(virtualCPU);
     }
 
-    public VirtualCPU pollVcpu(){
-        return runQueue.poll();
+    public VirtualCPU pollVcpu () throws InterruptedException {
+        return runQueue.take();
     }
 
 }
