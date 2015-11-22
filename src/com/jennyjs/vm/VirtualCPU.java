@@ -1,20 +1,31 @@
+package com.jennyjs.vm;
+
 /**
  * Created by jenny on 11/15/15.
  */
 public class VirtualCPU {
-    int clusterId;
+    public int clusterId;
     final int vmId;
     final int vCpuId;
     int weight;
     int cap;
-    Priority p;
+    public Priority p;
     private Task task;
 
     public enum Priority{    //Is it the priority of VMs same as priority of vCPUs
-        idle,
-        under,
-        over,
-        boost
+        idle (0),
+        under(1),
+        over(2),
+        boost(3);
+
+        private int level;
+        Priority(int i) {
+            this.level = i;
+        }
+
+        public int priorityLevel(){
+            return level;
+        }
     }
 
     public VirtualCPU(int clusterId, int vmId, int vCpuId, int weight, int cap, Priority p){
@@ -28,5 +39,6 @@ public class VirtualCPU {
 
     public void loadTask(Task task){
         this.task = task;
+        System.out.println("Loading task " + task.taskID + " to vCPU " + this.vCpuId);
     }
 }

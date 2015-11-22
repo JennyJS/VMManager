@@ -1,14 +1,13 @@
-import java.util.Queue;
-import java.util.concurrent.BlockingDeque;
+package com.jennyjs.vm;
+
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by jenny on 11/14/15.
  */
 public class TaskQueue<T> {
-    final private LinkedBlockingDeque<Task> queue = new LinkedBlockingDeque<>(100);
+    final private BlockingQueue<Task> queue = new LinkedBlockingQueue<>(100);
     private static TaskQueue<Task> taskQueue;
 
     public static TaskQueue getInstance(){
@@ -20,7 +19,8 @@ public class TaskQueue<T> {
     public void addTask(Task t){
         this.queue.add(t);
     }
-    public Task poll() throws InterruptedException {
+
+    public Task poll() throws InterruptedException{
         return this.queue.take();
     }
 }

@@ -1,3 +1,5 @@
+package com.jennyjs.vm;
+
 /**
  * Created by jenny on 11/14/15.
  */
@@ -13,7 +15,7 @@ public class TaskGenerator implements Runnable {
         int taskID = 0;
         while (taskID < taskNum) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

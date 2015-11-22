@@ -1,10 +1,13 @@
-import java.util.concurrent.LinkedBlockingDeque;
+package com.jennyjs.vm;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by jenny on 11/15/15.
  */
 public class VirtualCPUQueue {
-    private final LinkedBlockingDeque<VirtualCPU> queue = new LinkedBlockingDeque<>();
+    private final BlockingQueue<VirtualCPU> queue = new LinkedBlockingQueue<>();
     private static VirtualCPUQueue VirtualCPUQueue;
 
     public static VirtualCPUQueue getInstance(){
@@ -18,7 +21,7 @@ public class VirtualCPUQueue {
         this.queue.add(virtualCPU);
     }
 
-    public VirtualCPU poll() throws InterruptedException{
+    public VirtualCPU poll() throws InterruptedException {
         return this.queue.take();
     }
 }
