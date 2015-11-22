@@ -3,7 +3,7 @@ package com.jennyjs.vm;
 /**
  * Created by jenny on 11/21/15.
  */
-public class PhysicalCPU {
+public class PhysicalCPU extends Thread{
 
     final int pCPUId;
     Status s;
