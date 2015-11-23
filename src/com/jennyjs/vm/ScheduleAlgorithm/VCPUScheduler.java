@@ -8,23 +8,23 @@ import java.util.concurrent.*;
 /**
  * Created by jenny on 11/21/15.
  */
-public class Scheduler {
+public class VCPUScheduler {
     private final PriorityBlockingQueue<VirtualCPU> runQueue;
-    private static Scheduler scheduler;
+    private static VCPUScheduler VCPUScheduler;
 
-    private Scheduler(Comparator<VirtualCPU> comparator){
+    private VCPUScheduler(Comparator<VirtualCPU> comparator){
         runQueue = new PriorityBlockingQueue<>(10, comparator);
     }
 
     public static void init(Comparator<VirtualCPU> comparator) {
-        scheduler = new Scheduler(comparator);
+        VCPUScheduler = new VCPUScheduler(comparator);
     }
 
-    public static Scheduler getInstance(){
-        if (scheduler == null){
-            throw new IllegalArgumentException("Scheduler hasn't been initialized.");
+    public static VCPUScheduler getInstance(){
+        if (VCPUScheduler == null){
+            throw new IllegalArgumentException("VCPUScheduler hasn't been initialized.");
         }
-        return scheduler;
+        return VCPUScheduler;
     }
 
     public void addVcpu(VirtualCPU virtualCPU){

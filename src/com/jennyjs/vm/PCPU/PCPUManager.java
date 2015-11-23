@@ -2,9 +2,8 @@ package com.jennyjs.vm.PCPU;
 
 
 import com.jennyjs.vm.VCPU.VirtualCPU;
-import com.jennyjs.vm.ScheduleAlgorithm.MRGComparator;
 import com.jennyjs.vm.ScheduleAlgorithm.PCPUComparator;
-import com.jennyjs.vm.ScheduleAlgorithm.Scheduler;
+import com.jennyjs.vm.ScheduleAlgorithm.VCPUScheduler;
 
 import java.util.Comparator;
 import java.util.concurrent.ExecutorService;
@@ -42,7 +41,7 @@ public class PCPUManager implements Runnable {
         ExecutorService executor = Executors.newFixedThreadPool(5);
         while(true){
             try {
-                VirtualCPU vCPU = Scheduler.getInstance().pollVcpu();
+                VirtualCPU vCPU = VCPUScheduler.getInstance().pollVcpu();
                 PhysicalCPU pCPU = pCPUQueue.take();
                 pCPU.loadVCPU(vCPU);
                 executor.submit(pCPU);

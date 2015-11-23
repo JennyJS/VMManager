@@ -2,7 +2,7 @@ package com.jennyjs.vm.VCPU;
 
 import com.jennyjs.vm.ScheduleAlgorithm.CreditComparator;
 import com.jennyjs.vm.ScheduleAlgorithm.MRGComparator;
-import com.jennyjs.vm.ScheduleAlgorithm.Scheduler;
+import com.jennyjs.vm.ScheduleAlgorithm.VCPUScheduler;
 import com.jennyjs.vm.Task.Task;
 import com.jennyjs.vm.Task.TaskQueue;
 
@@ -40,7 +40,7 @@ public class VCPUManager extends Thread {
 
     private VCPUManager(ScheduleType type){
         this.type = type;
-        Scheduler.init(type.getComparator());
+        VCPUScheduler.init(type.getComparator());
     }
 
     @Override
@@ -51,7 +51,7 @@ public class VCPUManager extends Thread {
                 Task task = TaskQueue.getInstance().poll();
                 VirtualCPU virtualCPU = VCPUConnectorQueue.getInstance().poll();
                 virtualCPU.loadTask(task);
-                Scheduler.getInstance().addVcpu(virtualCPU);
+                VCPUScheduler.getInstance().addVcpu(virtualCPU);
             } catch (InterruptedException e){
                 System.out.print(e.getMessage());
             }

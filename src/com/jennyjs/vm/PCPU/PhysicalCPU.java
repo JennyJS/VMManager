@@ -1,6 +1,6 @@
 package com.jennyjs.vm.PCPU;
 
-import com.jennyjs.vm.ScheduleAlgorithm.Scheduler;
+import com.jennyjs.vm.ScheduleAlgorithm.VCPUScheduler;
 import com.jennyjs.vm.VCPU.VirtualCPU;
 
 /**
@@ -30,7 +30,7 @@ public class PhysicalCPU implements Runnable{
         }
 
         // VCPU back to queue
-        Scheduler.getInstance().addVcpu(virtualCPU);
+        VCPUScheduler.getInstance().addVcpu(virtualCPU);
         PCPUManager.getInstance().addPCUP(this);
     }
 
