@@ -1,4 +1,6 @@
-package com.jennyjs.vm;
+package com.jennyjs.vm.ScheduleAlgorithm;
+
+import com.jennyjs.vm.VCPU.VirtualCPU;
 
 import java.util.Comparator;
 import java.util.concurrent.*;

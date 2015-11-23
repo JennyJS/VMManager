@@ -1,7 +1,10 @@
-package com.jennyjs.vm;
+package com.jennyjs.vm.VCPU;
 
 import com.jennyjs.vm.ScheduleAlgorithm.CreditComparator;
 import com.jennyjs.vm.ScheduleAlgorithm.MRGComparator;
+import com.jennyjs.vm.ScheduleAlgorithm.Scheduler;
+import com.jennyjs.vm.Task.Task;
+import com.jennyjs.vm.Task.TaskQueue;
 
 /**
  * Created by jenny on 11/15/15.

@@ -1,4 +1,4 @@
-package com.jennyjs.vm;
+package com.jennyjs.vm.Task;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by jenny on 11/14/15.
  */
 public class Task {
-    final int taskID;
+    final public int taskID;
     final int groupID;
 
     final TaskType taskType;

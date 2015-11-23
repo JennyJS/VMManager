@@ -1,4 +1,6 @@
-package com.jennyjs.vm;
+package com.jennyjs.vm.VCPU;
+
+import com.jennyjs.vm.Task.Task;
 
 /**
  * Created by jenny on 11/15/15.
@@ -6,7 +8,7 @@ package com.jennyjs.vm;
 public class VirtualCPU {
     public int clusterId;
     final int vmId;
-    final int vCpuId;
+    final public int vCpuId;
     int weight;
     int cap;
     public Priority p;

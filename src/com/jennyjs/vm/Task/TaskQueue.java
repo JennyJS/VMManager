@@ -1,4 +1,4 @@
-package com.jennyjs.vm;
+package com.jennyjs.vm.Task;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

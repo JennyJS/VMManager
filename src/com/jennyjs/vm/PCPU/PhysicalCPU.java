@@ -1,4 +1,7 @@
-package com.jennyjs.vm;
+package com.jennyjs.vm.PCPU;
+
+import com.jennyjs.vm.VCPU.VirtualCPU;
+import com.jennyjs.vm.VCPU.VirtualCPUQueue;
 
 /**
  * Created by jenny on 11/21/15.

@@ -1,8 +1,10 @@
-package com.jennyjs.vm;
+package com.jennyjs.vm.PCPU;
 
 
+import com.jennyjs.vm.VCPU.VirtualCPU;
 import com.jennyjs.vm.ScheduleAlgorithm.MRGComparator;
 import com.jennyjs.vm.ScheduleAlgorithm.PCPUComparator;
+import com.jennyjs.vm.ScheduleAlgorithm.Scheduler;
 
 import java.util.Comparator;
 import java.util.concurrent.ExecutorService;

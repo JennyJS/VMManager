@@ -1,5 +1,13 @@
 package com.jennyjs.vm;
 
+import com.jennyjs.vm.PCPU.PCPUManager;
+import com.jennyjs.vm.PCPU.PhysicalCPU;
+import com.jennyjs.vm.Task.TaskGenerator;
+import com.jennyjs.vm.VCPU.VCPUManager;
+import com.jennyjs.vm.VCPU.VirtualCPU;
+import com.jennyjs.vm.VCPU.VirtualCPUQueue;
+import com.jennyjs.vm.Task.Task;
+
 /**
  * Created by jenny on 11/14/15.
  */
