@@ -6,15 +6,15 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Created by jenny on 11/15/15.
  */
-public class VirtualCPUQueue {
+public class VCPUConnectorQueue {
     private final BlockingQueue<VirtualCPU> queue = new LinkedBlockingQueue<>();
-    private static VirtualCPUQueue VirtualCPUQueue;
+    private static VCPUConnectorQueue VCPUConnectorQueue;
 
-    public static VirtualCPUQueue getInstance(){
-        if (VirtualCPUQueue == null){
-            VirtualCPUQueue = new VirtualCPUQueue();
+    public static VCPUConnectorQueue getInstance(){
+        if (VCPUConnectorQueue == null){
+            VCPUConnectorQueue = new VCPUConnectorQueue();
         }
-        return VirtualCPUQueue;
+        return VCPUConnectorQueue;
     }
 
     public void add(VirtualCPU virtualCPU){

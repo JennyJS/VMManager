@@ -20,6 +20,7 @@ public class Task {
     }
 
     public Task(long totalTime, TaskType taskType, int taskID, int groupID){
+        executedTime = 0L;
         createdTime = System.currentTimeMillis();
         this.totalTime = totalTime;
         this.taskType = taskType;
@@ -27,15 +28,8 @@ public class Task {
         this.groupID = groupID;
     }
 
-    Long lastStartedTime;
-    public void start() {
-        lastStartedTime = System.currentTimeMillis();
-    }
-
-    public void stop() {
-        executedTime += System.currentTimeMillis() - lastStartedTime;
-
-        lastStartedTime = null;
+    public void increasTime(long duration) {
+        executedTime += duration;
     }
 
     public boolean isFinished() {

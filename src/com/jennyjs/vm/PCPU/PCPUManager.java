@@ -16,10 +16,8 @@ import java.util.concurrent.PriorityBlockingQueue;
  * Created by jenny on 11/22/15.
  */
 public class PCPUManager implements Runnable {
+
     private final PriorityBlockingQueue<PhysicalCPU> pCPUQueue;
-    public void addPCUP(PhysicalCPU physicalCPU){
-        pCPUQueue.add(physicalCPU);
-    }
 
     private PCPUManager(Comparator<PhysicalCPU> comparator){
         pCPUQueue = new PriorityBlockingQueue<>(5, comparator);
@@ -34,14 +32,17 @@ public class PCPUManager implements Runnable {
         return pcpuManager;
     }
 
+    public void addPCUP(PhysicalCPU physicalCPU){
+        System.out.println("Adding PCPU back to queue " + physicalCPU.toString());
+        pCPUQueue.add(physicalCPU);
+    }
 
     @Override
     public void run() {
         ExecutorService executor = Executors.newFixedThreadPool(5);
         while(true){
-            MRGComparator mrgComparator = new MRGComparator();
             try {
-                VirtualCPU vCPU = Scheduler.getInstance(mrgComparator).pollVcpu();
+                VirtualCPU vCPU = Scheduler.getInstance().pollVcpu();
                 PhysicalCPU pCPU = pCPUQueue.take();
                 pCPU.loadVCPU(vCPU);
                 executor.submit(pCPU);

@@ -1,7 +1,7 @@
 package com.jennyjs.vm.PCPU;
 
+import com.jennyjs.vm.ScheduleAlgorithm.Scheduler;
 import com.jennyjs.vm.VCPU.VirtualCPU;
-import com.jennyjs.vm.VCPU.VirtualCPUQueue;
 
 /**
  * Created by jenny on 11/21/15.
@@ -15,21 +15,22 @@ public class PhysicalCPU implements Runnable{
 
     @Override
     public void run() {
-        virtualCPU.task.start();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        virtualCPU.task.stop();
+
+        virtualCPU.task.increasTime(1);
 
         if (virtualCPU.task.isFinished()){
             virtualCPU.p = VirtualCPU.Priority.idle;
+            virtualCPU.task = null;
             System.out.println("Task " + virtualCPU.task.taskID + " is finished.");
         }
 
         // VCPU back to queue
-        VirtualCPUQueue.getInstance().add(virtualCPU);
+        Scheduler.getInstance().addVcpu(virtualCPU);
         PCPUManager.getInstance().addPCUP(this);
     }
 
@@ -55,5 +56,10 @@ public class PhysicalCPU implements Runnable{
         this.virtualCPU = vCPU;
         this.s = Status.busy;
         System.out.println("Loading vCPU " + vCPU.vCpuId);
+    }
+
+    @Override
+    public String toString(){
+        return "PCPU Id is " + this.pCPUId;
     }
 }

@@ -10,17 +10,21 @@ import java.util.concurrent.*;
  */
 public class Scheduler {
     private final PriorityBlockingQueue<VirtualCPU> runQueue;
-    private static Scheduler Scheduler;
+    private static Scheduler scheduler;
 
     private Scheduler(Comparator<VirtualCPU> comparator){
         runQueue = new PriorityBlockingQueue<>(10, comparator);
     }
 
-    public static Scheduler getInstance(Comparator<VirtualCPU> comparator){
-        if (Scheduler == null){
-            Scheduler = new Scheduler(comparator);
+    public static void init(Comparator<VirtualCPU> comparator) {
+        scheduler = new Scheduler(comparator);
+    }
+
+    public static Scheduler getInstance(){
+        if (scheduler == null){
+            throw new IllegalArgumentException("Scheduler hasn't been initialized.");
         }
-        return Scheduler;
+        return scheduler;
     }
 
     public void addVcpu(VirtualCPU virtualCPU){
