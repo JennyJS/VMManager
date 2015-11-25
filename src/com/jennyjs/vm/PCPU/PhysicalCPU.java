@@ -9,8 +9,8 @@ import com.jennyjs.vm.VCPU.VirtualCPU;
 public class PhysicalCPU implements Runnable{
 
     final int pCPUId;
-    public Status s;
-    int maxProcessingTime;
+    public Status status;
+    long maxProcessingTime;
     private VirtualCPU virtualCPU;
 
     @Override
@@ -21,7 +21,7 @@ public class PhysicalCPU implements Runnable{
             e.printStackTrace();
         }
 
-        virtualCPU.task.increasTime(1);
+        virtualCPU.task.increaseTime(1);
 
         if (virtualCPU.task.isFinished()){
             virtualCPU.p = VirtualCPU.Priority.idle;
@@ -49,12 +49,12 @@ public class PhysicalCPU implements Runnable{
 
     public PhysicalCPU(int pCPUId, Status status){
         this.pCPUId = pCPUId;
-        this.s = status;
+        this.status = status;
     }
 
     public void loadVCPU(VirtualCPU vCPU){
         this.virtualCPU = vCPU;
-        this.s = Status.busy;
+        this.status = Status.busy;
         System.out.println("Loading vCPU " + vCPU.vCpuId);
     }
 

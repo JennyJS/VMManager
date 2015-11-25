@@ -16,7 +16,7 @@ public class Task {
 
     public enum TaskType{
         IoTask,
-        NonIOTask
+        NonIoTask
     }
 
     public Task(long totalTime, TaskType taskType, int taskID, int groupID){
@@ -28,7 +28,7 @@ public class Task {
         this.groupID = groupID;
     }
 
-    public void increasTime(long duration) {
+    public void increaseTime(long duration) {
         executedTime += duration;
     }
 

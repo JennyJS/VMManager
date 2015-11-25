@@ -1,5 +1,8 @@
 package com.jennyjs.vm.Task;
 
+
+import com.jennyjs.vm.Util.Constants;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -7,8 +10,12 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Created by jenny on 11/14/15.
  */
 public class TaskQueue<T> {
-    final private BlockingQueue<Task> queue = new LinkedBlockingQueue<>(100);
+    final private BlockingQueue<Task> queue;
     private static TaskQueue<Task> taskQueue;
+
+    private TaskQueue(){
+        this.queue = new LinkedBlockingQueue<>(Constants.TASKQUEUESIZE);
+    }
 
     public static TaskQueue getInstance(){
         if (taskQueue == null) {

@@ -11,6 +11,6 @@ public class PCPUComparator implements Comparator<PhysicalCPU> {
 
     @Override
     public int compare(PhysicalCPU o1, PhysicalCPU o2) {
-        return o1.s.pCPULevel() - o2.s.pCPULevel();
+        return o1.status.pCPULevel() - o2.status.pCPULevel();
     }
 }
