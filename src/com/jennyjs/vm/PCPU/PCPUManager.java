@@ -1,6 +1,7 @@
 package com.jennyjs.vm.PCPU;
 
 
+import com.jennyjs.vm.Util.Constants;
 import com.jennyjs.vm.VCPU.VirtualCPU;
 import com.jennyjs.vm.ScheduleAlgorithm.PCPUComparator;
 import com.jennyjs.vm.ScheduleAlgorithm.VCPUScheduler;
@@ -38,7 +39,7 @@ public class PCPUManager implements Runnable {
 
     @Override
     public void run() {
-        ExecutorService executor = Executors.newFixedThreadPool(5);
+        ExecutorService executor = Executors.newFixedThreadPool(Constants.PCPUNUMBER);
         while(true){
             try {
                 VirtualCPU vCPU = VCPUScheduler.getInstance().pollVcpu();

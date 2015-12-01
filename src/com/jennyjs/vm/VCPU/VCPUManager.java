@@ -6,6 +6,8 @@ import com.jennyjs.vm.ScheduleAlgorithm.VCPUScheduler;
 import com.jennyjs.vm.Task.Task;
 import com.jennyjs.vm.Task.TaskQueue;
 
+
+
 import java.util.Comparator;
 
 /**
@@ -50,7 +52,9 @@ public class VCPUManager extends Thread {
             try {
                 Task task = TaskQueue.getInstance().poll();
                 VirtualCPU virtualCPU = VCPUConnectorQueue.getInstance().poll();
-                virtualCPU.loadTask(task);
+                if (!virtualCPU.isBusy){
+                    virtualCPU.loadTask(task);
+                }
                 VCPUScheduler.getInstance().addVcpu(virtualCPU);
             } catch (InterruptedException e){
                 System.out.print(e.getMessage());

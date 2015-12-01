@@ -1,5 +1,6 @@
 package com.jennyjs.vm.ScheduleAlgorithm;
 
+import com.jennyjs.vm.Util.Constants;
 import com.jennyjs.vm.VCPU.VirtualCPU;
 
 import java.util.Comparator;
@@ -9,11 +10,12 @@ import java.util.concurrent.*;
  * Created by jenny on 11/21/15.
  */
 public class VCPUScheduler {
-    private final PriorityBlockingQueue<VirtualCPU> runQueue;
+    private final BlockingQueue<VirtualCPU> runQueue;
     private static VCPUScheduler VCPUScheduler;
 
+    //TODO
     private VCPUScheduler(Comparator<VirtualCPU> comparator){
-        runQueue = new PriorityBlockingQueue<>(10, comparator);
+        runQueue = new PriorityBlockingQueue<>(Constants.VCPUNUMBER, comparator);
     }
 
     public static void init(Comparator<VirtualCPU> comparator) {

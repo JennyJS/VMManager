@@ -3,6 +3,7 @@ package com.jennyjs.vm.Task;
 
 import com.jennyjs.vm.Util.Constants;
 
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -27,7 +28,8 @@ public class TaskQueue<T> {
         this.queue.add(t);
     }
 
-    public Task poll() throws InterruptedException{
+    public Task poll() throws InterruptedException {
         return this.queue.take();
     }
 }
+

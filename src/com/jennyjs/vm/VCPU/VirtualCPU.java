@@ -9,16 +9,16 @@ public class VirtualCPU {
     public int clusterId;
     final int vmId;
     final public int vCpuId;
-    int weight;
-    int cap;
+    int credit;
     public Priority p;
     public Task task;
+    public boolean isDom0;
+    //TODO
+    public boolean isBusy;
 
-    public enum Priority{    //Is it the priority of VMs same as priority of vCPUs
-        idle (0),
+    public enum Priority{    //when to change the Priority?
         under(1),
-        over(2),
-        boost(3);
+        over(2);
 
         private int level;
         Priority(int i) {
@@ -30,17 +30,18 @@ public class VirtualCPU {
         }
     }
 
-    public VirtualCPU(int clusterId, int vmId, int vCpuId, int weight, int cap, Priority p){
+
+    public VirtualCPU(int clusterId, int vmId, int vCpuId, int credit, Priority p){
         this.clusterId = clusterId;
         this.vmId = vmId;
         this.vCpuId = vCpuId;
-        this.weight = weight;
-        this.cap = cap;
+        this.credit = credit;
         this.p = p;
     }
 
     public void loadTask(Task task){
         this.task = task;
+        this.isBusy = true;
         System.out.println("Loading task " + task.taskID + " to vCPU " + this.vCpuId);
     }
 }

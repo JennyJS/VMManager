@@ -1,6 +1,7 @@
 package com.jennyjs.vm.PCPU;
 
 import com.jennyjs.vm.ScheduleAlgorithm.VCPUScheduler;
+import com.jennyjs.vm.Util.Constants;
 import com.jennyjs.vm.VCPU.VirtualCPU;
 
 /**
@@ -10,21 +11,21 @@ public class PhysicalCPU implements Runnable{
 
     final int pCPUId;
     public Status status;
-    long maxProcessingTime;
+
     private VirtualCPU virtualCPU;
 
     @Override
     public void run() {
         try {
-            Thread.sleep(1);
+            Thread.sleep(Constants.MAXPCPUPROCESSINGTIME);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        virtualCPU.task.increaseTime(1);
+        virtualCPU.task.calculateExecutedTime(Constants.MAXPCPUPROCESSINGTIME);
 
         if (virtualCPU.task.isFinished()){
-            virtualCPU.p = VirtualCPU.Priority.idle;
+            virtualCPU.isBusy = false;
             virtualCPU.task = null;
             System.out.println("Task " + virtualCPU.task.taskID + " is finished.");
         }

@@ -19,6 +19,8 @@ public class TaskGenerator implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            //TODO
+
             Task t = new Task(10, Task.TaskType.NonIoTask, taskID++, 1); //(long totalTime, TaskType taskType, int taskID, int groupID) Modify here!
             TaskQueue.getInstance().addTask(t);
             System.out.println("Generating..." + t);
