@@ -23,7 +23,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         //generating tasks
-        int numTasks =  0,numVms = 0,numVcpu = 0,numGroups = 0,taskCount = 0,index;
+        int numTasks = 0,numVcpu = 0,numVms = 0,numGroups = 0,taskCount = 0,index;
         String[] splitOut;
         String fileName = "C:/Users/Manasa/Downloads/VM/manhongren-coen283p3-76266bd0bd37/src/com/jennyjs/vm/input.txt";
         try{

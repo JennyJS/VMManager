@@ -15,7 +15,7 @@ public class VCPUScheduler {
 
     //TODO
     private VCPUScheduler(Comparator<VirtualCPU> comparator){
-        runQueue = new PriorityBlockingQueue<>(Constants.VCPUNUMBER, comparator);
+        runQueue = new PriorityBlockingQueue<>(Constants.MAXVCPU, comparator);
     }
 
     public static void init(Comparator<VirtualCPU> comparator) {
