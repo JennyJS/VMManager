@@ -5,6 +5,7 @@ import java.util.Date;
 /**
  * Created by jenny on 11/14/15.
  */
+
 public class Task {
     final public int taskID;
     final int groupID;
@@ -39,10 +40,11 @@ public class Task {
     @Override
     public String toString(){
         return String.format(
-               "<%s id=%s taskType=%s createdTime=%s>",
+               "<%s id=%s taskType=%s totalTime=%s createdTime=%s>",
                 this.getClass().getSimpleName(),
                 this.taskID,
                 this.taskType.name(),
+                this.totalTime,
                 new Date(this.createdTime)
         );
     }

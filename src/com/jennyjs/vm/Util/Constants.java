@@ -8,4 +8,6 @@ public class Constants {
     public static int VCPUNUMBER = 10;
     public static long MAXPCPUPROCESSINGTIME = 1;
     public static int PCPUNUMBER = 5;
+    public static int MAXTASKS = 1000;
+    public static int MAXVMS = 20;
 }
