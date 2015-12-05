@@ -2,8 +2,6 @@ package com.jennyjs.vm.Task;
 
 
 import com.jennyjs.vm.Util.Constants;
-
-
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
