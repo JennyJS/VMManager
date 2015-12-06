@@ -17,16 +17,17 @@ public class PhysicalCPU implements Runnable{
     @Override
     public void run() {
         try {
-            Thread.sleep(Constants.MAXPCPUPROCESSINGTIME);
+            Thread.sleep(Constants.MAX_PCPU_PROCESSING_TIME);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        virtualCPU.task.calculateExecutedTime(Constants.MAXPCPUPROCESSINGTIME);
+        virtualCPU.task.calculateExecutedTime(Constants.MAX_PCPU_PROCESSING_TIME);
 
         if (virtualCPU.task.isFinished()){
             virtualCPU.isBusy = false;
             virtualCPU.task = null;
+            assert virtualCPU.task != null;
             System.out.println("Task " + virtualCPU.task.taskID + " is finished.");
         }
 
@@ -50,7 +51,7 @@ public class PhysicalCPU implements Runnable{
 
     public PhysicalCPU(int pCPUId, Status status){
         this.pCPUId = pCPUId;
-        this.status = status;
+        this.status = Status.idle;
     }
 
     public void loadVCPU(VirtualCPU vCPU){

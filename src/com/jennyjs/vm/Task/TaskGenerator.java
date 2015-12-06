@@ -1,7 +1,5 @@
 package com.jennyjs.vm.Task;
 
-import com.jennyjs.vm.Util.TaskInfo;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,34 +9,21 @@ import java.util.List;
 
 public class TaskGenerator implements Runnable {
     //private final int taskNum;
-    static int taskID = 0;
-    List<TaskInfo> list = new ArrayList<>();
+    private final List<Task> list;
 
-    public TaskGenerator(List<TaskInfo> list) {
+    public TaskGenerator(final List<Task> list) {
         this.list = list;
     }
     @Override
     public void run() {
-       // int taskID = 0;
-        //while (taskID <= taskNum)
-        for(TaskInfo elem : list)
-        {
+        for(Task task : list) {
             try {
-                    Thread.sleep(1000);
-                    Task t;
-                    //System.out.println(" Task group :" + elem.groupNum + " Task Type :" + elem.tasktype + " Execution Time :" + elem.executionTime);
-                    if (elem.tasktype.equals("IO"))
-                        t = new Task(elem.executionTime, Task.TaskType.IoTask, ++taskID, elem.groupNum);
-                    else
-                        t = new Task(elem.executionTime, Task.TaskType.NonIoTask, ++taskID, elem.groupNum); //(long totalTime, TaskType taskType, int taskID, int groupID) Modify here!
-                    TaskQueue.getInstance().addTask(t);
-                    System.out.println("Generating..." + t);
+                Thread.sleep(1000);
+                TaskQueue.getInstance().addTask(task);
+                System.out.println("Generating..." + task);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-           /*Task t = new Task(10, Task.TaskType.NonIOTask, taskID, 1); //(long totalTime, TaskType taskType, int taskID, int groupID) Modify here!
-            TaskQueue.getInstance().addTask(t);
-            System.out.println("Generating..." + t);*/
         }
     }
 }

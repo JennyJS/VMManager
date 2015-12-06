@@ -1,7 +1,7 @@
 package com.jennyjs.vm.VCPU;
 
 import com.jennyjs.vm.Task.Task;
-import com.jennyjs.vm.Util.FileResult;
+import com.jennyjs.vm.Util.ParseResult;
 
 /**
  * Created by jenny on 11/15/15.
@@ -14,10 +14,10 @@ public class VirtualCPU {
     public int weight;
     public Priority p;
     public Task task;
-    //TODO
     public boolean isBusy;
     public long startProcessingIOTaskTime;
 
+    public static ParseResult parseResult;
 
     public enum Priority{    //when to change the Priority?
         under(1),
@@ -44,14 +44,13 @@ public class VirtualCPU {
         this.task = task;
         this.clusterId = task.groupID;
         this.isBusy = true;
-        this.credit = Math.round(FileResult.grpCredits.get(this.clusterId-1) * this.weight /FileResult.VmsTotalVcpuWt[this.vmId]);
-        this.p = Priority.under;
+        this.credit = Math.round(parseResult.grpCredits.get(this.clusterId-1) * this.weight / parseResult.vmsTotalVcpuWt.get(this.vmId));
         System.out.println("Loading task " + task.taskID + " to vCPU " + this.vCpuId);
     }
 
     public void getVcpu()
     {
         System.out.print("Vcpu Id : "+ this.vCpuId + " Vm Id :"+this.vmId + " Group Id :"+this.clusterId);
-        System.out.print(" Priority : "+ this.p + " Credit : " +this.credit + " Task id :" + this.task.taskID +"\n");
+        System.out.print(" Priority : " + this.p + " Credit : " + this.credit + " Task id :" + this.task.taskID + "\n");
     }
 }

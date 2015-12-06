@@ -14,11 +14,20 @@ public class Task {
     final long createdTime;
     final long totalTime;
     long executedTime;
-    long remainingTime;
 
     public enum TaskType{
         IoTask,
-        NonIoTask
+        NonIoTask;
+
+        public static TaskType mapFromString(String str){
+            for (TaskType taskType : values()) {
+                if (taskType.name().equals(str)) {
+                    return taskType;
+                }
+            }
+
+            return null;
+        }
     }
 
     public Task(long totalTime, TaskType taskType, int taskID, int groupID){

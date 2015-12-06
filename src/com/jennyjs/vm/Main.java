@@ -4,14 +4,11 @@ import com.jennyjs.vm.PCPU.PCPUManager;
 import com.jennyjs.vm.PCPU.PhysicalCPU;
 import com.jennyjs.vm.Task.TaskGenerator;
 import com.jennyjs.vm.Util.Constants;
+import com.jennyjs.vm.Util.ParseResult;
 import com.jennyjs.vm.Util.ReadFile;
-import com.jennyjs.vm.Util.TaskInfo;
 import com.jennyjs.vm.VCPU.VCPUManager;
 import com.jennyjs.vm.VCPU.VirtualCPU;
 import com.jennyjs.vm.VCPU.VCPUConnectorQueue;
-import java.util.Arrays;
-import java.util.List;
-import com.jennyjs.vm.Util.FileResult;
 
 /**
  * Created by jenny on 11/14/15.
@@ -19,47 +16,28 @@ import com.jennyjs.vm.Util.FileResult;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-            //Reading Configuration Parameters
-            ReadFile.ReadConfigFile();
-            //Reading Input File
-            List<TaskInfo> list = ReadFile.ReadInputFile();
-            //Start the Task generator thread
-            Thread taskGeneratorThread = new Thread(new TaskGenerator(list));
-            taskGeneratorThread.run();
+        final ParseResult parseResult;
+        try {
+            parseResult = ReadFile.parseFile("/Users/jenny/Java_workspace/COEN283_P3/src/com/jennyjs/vm/input.json");
+        } catch (Exception e) {
+            System.out.println("Can't read file! Abort!");
+            return;
+        }
 
-            FileResult.VmsTotalVcpuWt = new int[FileResult.numVms]; //Array stores total weight of vCpu in a VM
-            Arrays.fill(FileResult.VmsTotalVcpuWt, 0);
+        VirtualCPU.parseResult = parseResult;
 
-            int vCpuId = 0,VmId = 0;
+        final Thread taskGeneratorThread = new Thread(new TaskGenerator(parseResult.tasks));
+        taskGeneratorThread.run();
 
-            //Configuring the number of vcpu per vm
-            int vcpuPerVm = (int)Math.ceil((double)FileResult.numVcpu/FileResult.numVms);
+        //load task to VCPU, put the VCPUs into the run queue and sort based on MRG
+        for (VirtualCPU virtualCPU : parseResult.virtualCPUs) {
+            VCPUConnectorQueue.getInstance().add(virtualCPU);
+        }
 
-            //create VCPUs and add to VCPUQueue.
-            for(int i = 0; i < FileResult.numVcpu; i++){
-                //System.out.println("Enter Loop " + i);
-                int weight = FileResult.vcpuCredits.get(i);
-                if(vCpuId >= vcpuPerVm) {
-                    vCpuId = 0;
-                    VmId++;
-                }
-                VirtualCPU v = new VirtualCPU(VmId, vCpuId, weight); //VM id,Vcpu Id,weight
-                VCPUConnectorQueue.getInstance().add(v);
-                FileResult.VmsTotalVcpuWt[VmId] += weight;
-                //System.out.println("vmid "+VmId + "vcpu id "+vCpuId + "weight "+ weight);
-                vCpuId++;
-            }
-
-            /*System.out.println("Array containing total weights of all Vcpu in the VM");
-            for(int i = 0; i < FileResult.numVms; i++){
-                System.out.println("VM " + i + ": " +FileResult.VmsTotalVcpuWt[i]);
-            }*/
-
-            //load task to VCPU, put the VCPUs into the run queue and sort based on MRG
-            VCPUManager.getInstance(VCPUManager.ScheduleType.MRG).start();
+        VCPUManager.getInstance(VCPUManager.ScheduleType.MRG).start();
 
         // create several PCPUs and put them into the PCPU queue
-        for (int j = 0; j < Constants.PCPUNUMBER; j++){
+        for (int j = 0; j < Constants.PCPU_NUMBER; j++){
             PCPUManager.getInstance().addPCUP(new PhysicalCPU(j, PhysicalCPU.Status.idle));
         }
 

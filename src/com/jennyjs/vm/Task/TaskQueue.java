@@ -13,7 +13,7 @@ public class TaskQueue<T> {
     private static TaskQueue<Task> taskQueue;
 
     private TaskQueue(){
-        this.queue = new LinkedBlockingQueue<>(Constants.TASKQUEUESIZE);
+        this.queue = new LinkedBlockingQueue<>(Constants.TASK_QUEUE_SIZE);
     }
 
     public static TaskQueue getInstance(){

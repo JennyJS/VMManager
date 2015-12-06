@@ -8,7 +8,6 @@ import com.jennyjs.vm.VCPU.VirtualCPU;
 import com.jennyjs.vm.ScheduleAlgorithm.PCPUComparator;
 import com.jennyjs.vm.ScheduleAlgorithm.VCPUScheduler;
 
-import java.util.Calendar;
 import java.util.Comparator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -42,13 +41,13 @@ public class PCPUManager implements Runnable {
 
     @Override
     public void run() {
-        ExecutorService executor = Executors.newFixedThreadPool(Constants.PCPUNUMBER);
-        //pool from dom0 queue first and check, then poll from VCPU queue
+        ExecutorService executor = Executors.newFixedThreadPool(Constants.PCPU_NUMBER);
+        //poll from dom0 queue first and check, then poll from VCPU queue
         while(true){
             try {
                 VirtualCPU virtualCPUInDom0 = Dom0Queue.getInstance().peek();
                 VirtualCPU vCPU;
-                if (virtualCPUInDom0 != null && System.currentTimeMillis() - virtualCPUInDom0.startProcessingIOTaskTime >= Constants.IOTASKPROCESSINGTIME){
+                if (virtualCPUInDom0 != null && System.currentTimeMillis() - virtualCPUInDom0.startProcessingIOTaskTime >= Constants.IO_TASK_PROCESSING_TIME){
                     vCPU = virtualCPUInDom0;
                 } else {
                     vCPU = VCPUScheduler.getInstance().pollVcpu();

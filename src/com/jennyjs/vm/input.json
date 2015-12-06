@@ -1,0 +1,43 @@
+{
+  "numTask": 10,
+  "NumVM": 4,
+  "tasks" : [
+    {
+      "groupId" : 1,
+      "type": "IoTask",
+      "exeTime": 140
+    },
+    {
+      "groupId" : 1,
+      "type": "IoTask",
+      "exeTime": 120
+    },
+
+    {
+      "groupId" : 1,
+      "type": "NonIoTask",
+      "exeTime": 60
+    },
+    {
+      "groupId" : 2,
+      "type": "NonIoTask",
+      "exeTime": 160
+    }
+  ],
+
+  "GroupCredits": [
+    600, 300, 400
+  ],
+  "VcpuCredits": [
+    256,
+    512,
+    256,
+    500,
+    200,
+    256,
+    512,
+    500,
+    300,
+    500
+  ]
+}
