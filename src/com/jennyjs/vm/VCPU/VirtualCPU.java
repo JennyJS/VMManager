@@ -14,9 +14,10 @@ public class VirtualCPU {
     public int weight;
     public Priority p;
     public Task task;
-    public boolean isDom0;
     //TODO
     public boolean isBusy;
+    public long startProcessingIOTaskTime;
+
 
     public enum Priority{    //when to change the Priority?
         under(1),

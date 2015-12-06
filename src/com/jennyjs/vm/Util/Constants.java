@@ -10,4 +10,5 @@ public class Constants {
     public static int PCPUNUMBER = 5;
     public static int MAXTASKS = 1000;
     public static int MAXVMS = 20;
+    public static int IOTASKPROCESSINGTIME = 20;
 }

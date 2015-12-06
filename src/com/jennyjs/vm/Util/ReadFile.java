@@ -13,7 +13,7 @@ public class ReadFile {
     public static List<TaskInfo> ReadInputFile() {
         int taskCount = 0, index;
         String[] splitOut;
-        String fileName = "C:/Users/Manasa/Downloads/VM/VM/src/com/jennyjs/vm/input.txt";
+        String fileName = "/Users/jenny/Java_workspace/COEN283_P3/src/com/jennyjs/vm/input.txt";
 
         List<TaskInfo> list = null;
         try {

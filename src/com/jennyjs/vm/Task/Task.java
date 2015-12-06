@@ -10,7 +10,7 @@ public class Task {
     final public int taskID;
     final public int groupID;
 
-    final TaskType taskType;
+    public final TaskType taskType;
     final long createdTime;
     final long totalTime;
     long executedTime;

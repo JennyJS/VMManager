@@ -58,12 +58,12 @@ public class Main {
             //load task to VCPU, put the VCPUs into the run queue and sort based on MRG
             VCPUManager.getInstance(VCPUManager.ScheduleType.MRG).start();
 
-            // create several PCPUs and put them into the PCPU queue
-            for (int j = 0; j < Constants.PCPUNUMBER; j++){
-                PCPUManager.getInstance().addPCUP(new PhysicalCPU(j, PhysicalCPU.Status.idle));
-            }
+        // create several PCPUs and put them into the PCPU queue
+        for (int j = 0; j < Constants.PCPUNUMBER; j++){
+            PCPUManager.getInstance().addPCUP(new PhysicalCPU(j, PhysicalCPU.Status.idle));
+        }
 
-            // allocate the vCPUs in the runQueue to the idle pCPUs
-            PCPUManager.getInstance().run();
+        // allocate the vCPUs in the runQueue to the idle pCPUs
+        PCPUManager.getInstance().run();
     }
 }
