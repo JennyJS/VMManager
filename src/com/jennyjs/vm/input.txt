@@ -1,26 +1,20 @@
 #number of tasks
 10
-#number of vms
-8
-#number of vcpus
-2
-#number of groups
-3
 #tasks
-2 IO 140
+1 IO 140
 1 IO 120
-2 NonIO 60
+1 NonIO 60
 1 IO 35 
-3 IO 40
+2 IO 40
 2 NonIO 165
-1 NonIO 76
-3 IO 98
+2 NonIO 76
+2 IO 98
 2 NonIO 112
 1 IO 135
 1 IO 120
-2 NonIO 61
+1 NonIO 61
 1 IO 35 
 3 IO 40
-2 NonIO 162
-1 NonIO 75
+3 NonIO 162
+3 NonIO 75
 3 IO 91

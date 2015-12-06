@@ -1,0 +1,21 @@
+#number of vms
+4
+#number of vcpus
+10
+#number of groups
+3
+#group credits
+600
+300
+400
+#vcpu credits/weight
+256
+512
+256
+500
+200
+256
+512
+500
+300
+500

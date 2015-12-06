@@ -55,6 +55,8 @@ public class VCPUManager extends Thread {
                 if (!virtualCPU.isBusy){
                     virtualCPU.loadTask(task);
                 }
+                System.out.println("---------Task loaded to Vcpu -----");
+                virtualCPU.getVcpu();
                 VCPUScheduler.getInstance().addVcpu(virtualCPU);
             } catch (InterruptedException e){
                 System.out.print(e.getMessage());

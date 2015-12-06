@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Task {
     final public int taskID;
-    final int groupID;
+    final public int groupID;
 
     final TaskType taskType;
     final long createdTime;
