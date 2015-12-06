@@ -19,7 +19,7 @@ public class VirtualCPU {
 
     public static ParseResult parseResult;
 
-    public enum Priority{    //when to change the Priority?
+    public enum Priority{
         under(1),
         over(2);
 
@@ -45,12 +45,12 @@ public class VirtualCPU {
         this.clusterId = task.groupID;
         this.isBusy = true;
         this.credit = Math.round(parseResult.grpCredits.get(this.clusterId-1) * this.weight / parseResult.vmsTotalVcpuWt.get(this.vmId));
+        this.p = Priority.over;
         System.out.println("Loading task " + task.taskID + " to vCPU " + this.vCpuId);
     }
 
-    public void getVcpu()
-    {
-        System.out.print("Vcpu Id : "+ this.vCpuId + " Vm Id :"+this.vmId + " Group Id :"+this.clusterId);
-        System.out.print(" Priority : " + this.p + " Credit : " + this.credit + " Task id :" + this.task.taskID + "\n");
+    public boolean withCreditLeft(){
+        return this.credit > 0;
     }
+
 }

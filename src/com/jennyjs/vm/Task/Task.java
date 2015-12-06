@@ -11,7 +11,7 @@ public class Task {
     final public int groupID;
 
     public final TaskType taskType;
-    final long createdTime;
+    public final long createdTime;
     final long totalTime;
     long executedTime;
 
@@ -49,11 +49,12 @@ public class Task {
     @Override
     public String toString(){
         return String.format(
-               "<%s id=%s taskType=%s totalTime=%s createdTime=%s>",
+               "<%s id=%s taskType=%s totalTime=%s executionTime=%s createdTime=%s>",
                 this.getClass().getSimpleName(),
                 this.taskID,
                 this.taskType.name(),
                 this.totalTime,
+                this.executedTime,
                 new Date(this.createdTime)
         );
     }

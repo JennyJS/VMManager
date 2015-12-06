@@ -2,6 +2,7 @@ package com.jennyjs.vm.PCPU;
 
 import com.jennyjs.vm.ScheduleAlgorithm.VCPUScheduler;
 import com.jennyjs.vm.Util.Constants;
+import com.jennyjs.vm.VCPU.VCPUManager;
 import com.jennyjs.vm.VCPU.VirtualCPU;
 
 /**
@@ -24,15 +25,14 @@ public class PhysicalCPU implements Runnable{
 
         virtualCPU.task.calculateExecutedTime(Constants.MAX_PCPU_PROCESSING_TIME);
 
+        System.out.println("Task " + virtualCPU.task.taskID + " isFinished:" + (virtualCPU.task.isFinished() ? "Yes " : "No ") + "Total execution time: " + (System.currentTimeMillis() - virtualCPU.task.createdTime));
         if (virtualCPU.task.isFinished()){
-            virtualCPU.isBusy = false;
-            virtualCPU.task = null;
-            assert virtualCPU.task != null;
-            System.out.println("Task " + virtualCPU.task.taskID + " is finished.");
+            unloadTask();
+            VCPUManager.VCPUConnectorQueue.getInstance().add(virtualCPU);
+        } else {
+            VCPUScheduler.getInstance().addVcpu(virtualCPU);
         }
 
-        // VCPU back to queue
-        VCPUScheduler.getInstance().addVcpu(virtualCPU);
         PCPUManager.getInstance().addPCUP(this);
     }
 
@@ -49,7 +49,7 @@ public class PhysicalCPU implements Runnable{
         }
     }
 
-    public PhysicalCPU(int pCPUId, Status status){
+    public PhysicalCPU(int pCPUId){
         this.pCPUId = pCPUId;
         this.status = Status.idle;
     }
@@ -57,7 +57,16 @@ public class PhysicalCPU implements Runnable{
     public void loadVCPU(VirtualCPU vCPU){
         this.virtualCPU = vCPU;
         this.status = Status.busy;
-        System.out.println("Loading vCPU " + vCPU.vCpuId);
+        vCPU.credit -= Constants.MAX_PCPU_PROCESSING_TIME;
+        if (!vCPU.withCreditLeft()){
+            vCPU.p = VirtualCPU.Priority.under;
+        }
+    }
+
+    private void unloadTask() {
+        virtualCPU.isBusy = false;
+        virtualCPU.task = null;
+        this.status = Status.idle;
     }
 
     @Override

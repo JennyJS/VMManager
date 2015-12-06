@@ -31,7 +31,7 @@ public class ReadFile {
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(pathToFile));
         JSONObject jsonObject = (JSONObject) obj;
-        numTasks = ((Number)jsonObject.get("numTask")).intValue();
+
         numVms = ((Number)jsonObject.get("NumVM")).intValue();
         JSONArray vCpulst = (JSONArray)jsonObject.get("VcpuCredits");
         numVcpu = vCpulst.size();
@@ -54,6 +54,7 @@ public class ReadFile {
                     taskId++,
                     ((Number) task.get("groupId")).intValue()));
         }
+        numTasks = taskInfo.size();
 
         for (Object aGroupLst : groupLst) {
             grpCredits.add(((Number) aGroupLst).intValue());

@@ -1,27 +1,15 @@
 {
-  "numTask": 10,
   "NumVM": 4,
   "tasks" : [
     {
       "groupId" : 1,
       "type": "IoTask",
-      "exeTime": 140
-    },
-    {
-      "groupId" : 1,
-      "type": "IoTask",
-      "exeTime": 120
-    },
-
-    {
-      "groupId" : 1,
-      "type": "NonIoTask",
-      "exeTime": 60
+      "exeTime": 13
     },
     {
       "groupId" : 2,
-      "type": "NonIoTask",
-      "exeTime": 160
+      "type": "IoTask",
+      "exeTime": 7
     }
   ],
 

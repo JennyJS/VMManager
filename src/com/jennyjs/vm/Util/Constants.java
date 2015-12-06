@@ -6,7 +6,7 @@ package com.jennyjs.vm.Util;
 public class Constants {
     public static int TASK_QUEUE_SIZE = 100;
     public static int MAX_VCPU = 50;
-    public static long MAX_PCPU_PROCESSING_TIME = 1;
+    public static long MAX_PCPU_PROCESSING_TIME = 5;
     public static int PCPU_NUMBER = 5;
     public static int MAX_TASKS = 1000;
     public static int MAX_VMS = 20;

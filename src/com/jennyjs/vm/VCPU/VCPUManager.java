@@ -9,6 +9,8 @@ import com.jennyjs.vm.Task.TaskQueue;
 
 
 import java.util.Comparator;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by jenny on 11/15/15.
@@ -16,6 +18,10 @@ import java.util.Comparator;
 public class VCPUManager extends Thread {
 
     private final ScheduleType type;
+
+    public ScheduleType getType() {
+        return type;
+    }
 
     public enum ScheduleType {
         MRG(new MRGComparator()),
@@ -33,9 +39,16 @@ public class VCPUManager extends Thread {
     }
 
     private static VCPUManager vcpuManager;
-    public static VCPUManager getInstance(ScheduleType type){
+
+    public static void init(final ScheduleType type){
         if (vcpuManager == null){
             vcpuManager = new VCPUManager(type);
+        }
+    }
+
+    public static VCPUManager getInstance(){
+        if (vcpuManager == null) {
+            throw new IllegalArgumentException("VCPUManager singleton hasn't been initialized");
         }
         return vcpuManager;
     }
@@ -52,15 +65,43 @@ public class VCPUManager extends Thread {
             try {
                 Task task = TaskQueue.getInstance().poll();
                 VirtualCPU virtualCPU = VCPUConnectorQueue.getInstance().poll();
+
                 if (!virtualCPU.isBusy){
                     virtualCPU.loadTask(task);
                 }
-                System.out.println("---------Task loaded to Vcpu -----");
-                virtualCPU.getVcpu();
-                VCPUScheduler.getInstance().addVcpu(virtualCPU);
+
+                if (task.taskType == Task.TaskType.IoTask){
+                    Dom0Manager.Dom0Queue.getInstance().add(virtualCPU);
+                } else {
+                    VCPUScheduler.getInstance().addVcpu(virtualCPU);
+                }
             } catch (InterruptedException e){
                 System.out.print(e.getMessage());
+                break;
             }
+        }
+    }
+
+    /**
+     * Created by jenny on 11/15/15.
+     */
+    public static class VCPUConnectorQueue {
+        private final BlockingQueue<VirtualCPU> queue = new LinkedBlockingQueue<>();
+        private static VCPUManager.VCPUConnectorQueue VCPUConnectorQueue;
+
+        public static VCPUManager.VCPUConnectorQueue getInstance(){
+            if (VCPUConnectorQueue == null){
+                VCPUConnectorQueue = new VCPUConnectorQueue();
+            }
+            return VCPUConnectorQueue;
+        }
+
+        public void add(VirtualCPU virtualCPU){
+            this.queue.add(virtualCPU);
+        }
+
+        public VirtualCPU poll() throws InterruptedException {
+            return this.queue.take();
         }
     }
 }

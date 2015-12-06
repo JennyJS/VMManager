@@ -8,9 +8,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Created by jenny on 11/14/15.
  */
-public class TaskQueue<T> {
+public class TaskQueue {
     final private BlockingQueue<Task> queue;
-    private static TaskQueue<Task> taskQueue;
+    private static TaskQueue taskQueue;
 
     private TaskQueue(){
         this.queue = new LinkedBlockingQueue<>(Constants.TASK_QUEUE_SIZE);
