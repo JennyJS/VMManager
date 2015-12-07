@@ -49,7 +49,7 @@ public class Task {
     @Override
     public String toString(){
         return String.format(
-               "<%s id=%s taskType=%s totalTime=%s executionTime=%s createdTime=%s>",
+               "<%s id=%s taskType=%s totalTime=%sms executedTime=%sms createdTime=%s>",
                 this.getClass().getSimpleName(),
                 this.taskID,
                 this.taskType.name(),

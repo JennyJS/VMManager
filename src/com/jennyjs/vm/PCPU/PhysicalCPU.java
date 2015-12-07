@@ -25,7 +25,7 @@ public class PhysicalCPU implements Runnable{
 
         virtualCPU.task.calculateExecutedTime(Constants.MAX_PCPU_PROCESSING_TIME);
 
-        System.out.println("Task " + virtualCPU.task.taskID + " isFinished:" + (virtualCPU.task.isFinished() ? "Yes " : "No ") + "Total execution time: " + (System.currentTimeMillis() - virtualCPU.task.createdTime));
+        System.out.println("Task " + virtualCPU.task.taskID + " isFinished:" + (virtualCPU.task.isFinished() ? "Yes " : "No ") + "Total execution time: " + (System.currentTimeMillis() - virtualCPU.task.createdTime) + "ms");
         if (virtualCPU.task.isFinished()){
             unloadTask();
             VCPUManager.VCPUConnectorQueue.getInstance().add(virtualCPU);
