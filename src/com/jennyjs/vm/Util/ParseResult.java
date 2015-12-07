@@ -1,6 +1,7 @@
 package com.jennyjs.vm.Util;
 
 import com.jennyjs.vm.Task.Task;
+import com.jennyjs.vm.VCPU.VCPUManager;
 import com.jennyjs.vm.VCPU.VirtualCPU;
 
 import java.util.Collections;
@@ -19,6 +20,7 @@ public class ParseResult {
     public final List<Integer> vmsTotalVcpuWt;
     public final List<Task> tasks;
     public final List<VirtualCPU> virtualCPUs;
+    public final VCPUManager.ScheduleType type;
 
     public ParseResult(final int numTasks,
                        final int numVms,
@@ -28,7 +30,8 @@ public class ParseResult {
                        final List<Integer> vcpuCredits,
                        final List<Integer> vmsTotalVcpuWt,
                        final List<Task> tasks,
-                       final List<VirtualCPU> virtualCPUs) {
+                       final List<VirtualCPU> virtualCPUs,
+                       final VCPUManager.ScheduleType type) {
 
         this.numTasks = numTasks;
         this.numVms = numVms;
@@ -39,5 +42,6 @@ public class ParseResult {
         this.vmsTotalVcpuWt = Collections.unmodifiableList(vmsTotalVcpuWt);
         this.tasks = Collections.unmodifiableList(tasks);
         this.virtualCPUs = Collections.unmodifiableList(virtualCPUs);
+        this.type = type;
     }
 }

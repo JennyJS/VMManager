@@ -1,6 +1,7 @@
 package com.jennyjs.vm.Util;
 
 import com.jennyjs.vm.Task.Task;
+import com.jennyjs.vm.VCPU.VCPUManager;
 import com.jennyjs.vm.VCPU.VirtualCPU;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -27,17 +28,20 @@ public class ReadFile {
         final List<Integer> vmsTotalVcpuWt = new ArrayList<>();
         final List<Task> taskInfo = new ArrayList<>();
         final List<VirtualCPU> vcpus = new ArrayList<>();
+        final VCPUManager.ScheduleType type;
 
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(pathToFile));
         JSONObject jsonObject = (JSONObject) obj;
 
-        numVms = ((Number)jsonObject.get("NumVM")).intValue();
-        JSONArray vCpulst = (JSONArray)jsonObject.get("VcpuCredits");
+        numVms = ((Number)jsonObject.get("numVM")).intValue();
+        JSONArray vCpulst = (JSONArray)jsonObject.get("vcpuCredits");
         numVcpu = vCpulst.size();
-        JSONArray groupLst = (JSONArray)jsonObject.get("GroupCredits");
+        JSONArray groupLst = (JSONArray)jsonObject.get("groupCredits");
         numGroups = groupLst.size();
         JSONArray taskArr = (JSONArray)jsonObject.get("tasks");
+        type = VCPUManager.ScheduleType.mapFromString((String) jsonObject.get("algo"));
+
 
 
         for (int i = 0; i < numVms; i++) {
@@ -82,6 +86,6 @@ public class ReadFile {
             vCpuId++;
         }
 
-        return new ParseResult(numTasks, numVms, numVcpu, numGroups, grpCredits, vcpuCredits, vmsTotalVcpuWt, taskInfo, vcpus);
+        return new ParseResult(numTasks, numVms, numVcpu, numGroups, grpCredits, vcpuCredits, vmsTotalVcpuWt, taskInfo, vcpus,type);
     }
 }

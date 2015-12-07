@@ -36,6 +36,18 @@ public class VCPUManager extends Thread {
         public Comparator<VirtualCPU> getComparator(){
             return this.comparator;
         }
+
+        public static ScheduleType mapFromString(String str){
+            for (ScheduleType scheduleType : values()) {
+                if (scheduleType.name().equals(str)) {
+                    return scheduleType;
+                }
+            }
+
+            return null;
+        }
+
+
     }
 
     private static VCPUManager vcpuManager;

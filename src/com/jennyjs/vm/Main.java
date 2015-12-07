@@ -38,7 +38,7 @@ public class Main {
             VCPUManager.VCPUConnectorQueue.getInstance().add(virtualCPU);
         }
 
-        VCPUManager.init(VCPUManager.ScheduleType.MRG);
+        VCPUManager.init(parseResult.type);
         Dom0Manager.getInstance().start();
         VCPUManager.getInstance().start();
 

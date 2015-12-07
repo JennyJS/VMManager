@@ -1,5 +1,6 @@
 {
-  "NumVM": 4,
+  "algo": "CREDIT",
+  "numVM": 4,
   "tasks" : [
     {
       "groupId" : 1,
@@ -13,10 +14,10 @@
     }
   ],
 
-  "GroupCredits": [
+  "groupCredits": [
     600, 300, 400
   ],
-  "VcpuCredits": [
+  "vcpuCredits": [
     256,
     512,
     256,
