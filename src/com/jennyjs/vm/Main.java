@@ -10,6 +10,9 @@ import com.jennyjs.vm.VCPU.Dom0Manager;
 import com.jennyjs.vm.VCPU.VCPUManager;
 import com.jennyjs.vm.VCPU.VirtualCPU;
 
+import java.net.URL;
+import java.nio.file.Paths;
+
 /**
  * Created by jenny on 11/14/15.
  */
@@ -18,7 +21,8 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         final ParseResult parseResult;
         try {
-            parseResult = ReadFile.parseFile("/Users/jenny/Java_workspace/COEN283_P3/src/com/jennyjs/vm/input.json");
+            URL path = Main.class.getResource("input.json");
+            parseResult = ReadFile.parseFile(path.getFile());
         } catch (Exception e) {
             System.out.println("Can't read file! Abort! " + e);
             return;
