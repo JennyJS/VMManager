@@ -10,6 +10,10 @@ import com.jennyjs.vm.VCPU.Dom0Manager;
 import com.jennyjs.vm.VCPU.VCPUManager;
 import com.jennyjs.vm.VCPU.VirtualCPU;
 
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.net.URL;
 import java.nio.file.Paths;
 
@@ -26,6 +30,12 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Can't read file! Abort! " + e);
             return;
+        }
+
+        try {
+            System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("output_" + System.currentTimeMillis() + "_" + parseResult.type.name() + ".txt")), true));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
 
         VirtualCPU.parseResult = parseResult;
