@@ -1,16 +1,36 @@
 {
-  "algo": "CREDIT",
+  "algo": "MRG",
   "numVM": 4,
   "tasks" : [
     {
-      "groupId" : 1,
-      "type": "IoTask",
-      "exeTime": 13
+      "groupId" : 1, "type": "IoTask", "exeTime": 5
     },
     {
-      "groupId" : 2,
-      "type": "IoTask",
-      "exeTime": 7
+      "groupId" : 1, "type": "NonIoTask", "exeTime": 1
+    },
+    {
+      "groupId" : 2, "type": "IoTask", "exeTime":6
+    },
+    {
+      "groupId" : 2, "type": "NonIoTask", "exeTime": 2
+    },
+    {
+      "groupId" : 3, "type": "IoTask", "exeTime": 7
+    },
+    {
+      "groupId" : 3, "type": "NonIoTask", "exeTime": 3
+    },
+    {
+      "groupId" : 4, "type": "IoTask", "exeTime":8
+    },
+    {
+      "groupId" : 4, "type": "NonIoTask", "exeTime": 4
+    },
+    {
+      "groupId" : 5, "type": "IoTask", "exeTime": 9
+    },
+    {
+      "groupId" : 5, "type": "NonIoTask", "exeTime": 5
     }
   ],
 
