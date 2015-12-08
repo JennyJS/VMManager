@@ -15,7 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.net.URL;
-import java.nio.file.Paths;
+
 
 /**
  * Created by jenny on 11/14/15.
@@ -28,7 +28,7 @@ public class Main {
             URL path = Main.class.getResource("input.json");
             parseResult = ReadFile.parseFile(path.getFile());
         } catch (Exception e) {
-            System.out.println("Can't read file! Abort! " + e);
+            System.out.println("Can't read file! " + e);
             return;
         }
 

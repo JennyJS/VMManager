@@ -65,8 +65,5 @@ public class Dom0Manager extends Thread {
             return this.queue.take();
         }
 
-        public VirtualCPU peek(){
-            return this.queue.peek();
-        }
     }
 }

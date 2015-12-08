@@ -1,5 +1,7 @@
 package com.jennyjs.vm.Task;
 
+import com.jennyjs.vm.Util.Constants;
+
 import java.util.List;
 
 /**
@@ -18,7 +20,7 @@ public class TaskGenerator implements Runnable {
     public void run() {
         for(Task task : list) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(Constants.TASK_GENERATING_INTERVAL);
                 TaskQueue.getInstance().addTask(task);
                 System.out.println("Generating..." + task);
             } catch (InterruptedException e) {

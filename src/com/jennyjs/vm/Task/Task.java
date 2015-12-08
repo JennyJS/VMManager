@@ -16,8 +16,18 @@ public class Task {
     long executedTime;
 
     public enum TaskType{
-        IoTask,
-        NonIoTask;
+        IoTask(1),
+        NonIoTask(0);
+        private final int priority;
+        TaskType(int i){
+            this.priority = i;
+        }
+
+        public int getPriority(){
+            return priority;
+        }
+
+
 
         public static TaskType mapFromString(String str){
             for (TaskType taskType : values()) {

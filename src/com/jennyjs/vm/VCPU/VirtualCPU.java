@@ -48,6 +48,7 @@ public class VirtualCPU {
         this.credit = 100;
         this.p = Priority.over;
         System.out.println("Loading task " + task.taskID + " to vCPU " + this.vCpuId);
+
     }
 
     public boolean withCreditLeft(){
