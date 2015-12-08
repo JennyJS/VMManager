@@ -33,6 +33,7 @@ public class Main {
         }
 
         try {
+            ParseResult.stdout = System.out;
             System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("output_" + System.currentTimeMillis() + "_" + parseResult.type.name() + ".txt")), true));
         } catch (FileNotFoundException e) {
             e.printStackTrace();

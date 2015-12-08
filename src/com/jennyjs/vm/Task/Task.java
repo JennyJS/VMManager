@@ -12,6 +12,7 @@ public class Task {
 
     public final TaskType taskType;
     public final long createdTime;
+    public long TotalExecutionTime;
     final long totalTime;
     long executedTime;
 

@@ -4,6 +4,7 @@ import com.jennyjs.vm.Task.Task;
 import com.jennyjs.vm.VCPU.VCPUManager;
 import com.jennyjs.vm.VCPU.VirtualCPU;
 
+import java.io.PrintStream;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class ParseResult {
     public final List<Task> tasks;
     public final List<VirtualCPU> virtualCPUs;
     public final VCPUManager.ScheduleType type;
+    public static PrintStream stdout;
 
     public ParseResult(final int numTasks,
                        final int numVms,
