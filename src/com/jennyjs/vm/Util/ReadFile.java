@@ -43,7 +43,10 @@ public class ReadFile {
         type = VCPUManager.ScheduleType.mapFromString((String) jsonObject.get("algo"));
 
 
-
+        if((numVms > Constants.MAX_VM) || (numVcpu > Constants.MAX_VCPU) || (numGroups > Constants.CLUSTER_NUMBER)){
+             System.out.println("Invalid Input[Max VM Supported = 10, MAX_VCPU Supported = 50, MAX_GROUPS Supported= 3 ]");
+             System.exit(0);
+        }
         for (int i = 0; i < numVms; i++) {
             vmsTotalVcpuWt.add(0);
         }

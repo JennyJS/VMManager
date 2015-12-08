@@ -32,14 +32,14 @@ public class PhysicalCPU implements Runnable{
             System.out.println(" ------- Task "+virtualCPU.task.taskID+" completed execution "+ " [ Total Execution Time = "+virtualCPU.task.TotalExecutionTime+" ] ------------");
             // for calculating each group of tasks' finish time
             calculateGroupOfTaskFinishTime(virtualCPU);
+            incrementCompletedTaskCount();
             unloadTask();
             VCPUManager.VCPUConnectorQueue.getInstance().add(virtualCPU);
-            incrementCompletedTaskCount();
         } else {
             VCPUScheduler.getInstance().addVcpu(virtualCPU);
         }
 
-        if(completedTaskCount >= virtualCPU.parseResult.numTasks){
+        if(getCompletedTaskCount() >= virtualCPU.parseResult.numTasks){
             System.setOut(ParseResult.stdout);
             System.out.println("----- Completed Processing All Tasks in the Input File [ Total Tasks Executed : " + virtualCPU.parseResult.numTasks + " ] ------");
             for (int i = 0; i < clusters.length; i++){
@@ -95,4 +95,6 @@ public class PhysicalCPU implements Runnable{
     private static synchronized void calculateGroupOfTaskFinishTime(VirtualCPU virtualCPU){
         clusters[virtualCPU.task.groupID - 1] += virtualCPU.task.TotalExecutionTime;
     }
+
+    private static synchronized int getCompletedTaskCount(){return completedTaskCount;}
 }

@@ -1,0 +1,32 @@
+{
+  "algo": "CREDIT",
+  "numVM": 2,
+  "tasks" : [
+    {
+      "groupId" : 1, "type": "IoTask", "exeTime": 5
+    },
+    {
+      "groupId" : 1, "type": "NonIoTask", "exeTime": 15
+    },
+    {
+      "groupId" : 2, "type": "IoTask", "exeTime":6
+    },
+    {
+      "groupId" : 2, "type": "NonIoTask", "exeTime": 12
+    },
+    {
+      "groupId" : 2, "type": "IoTask", "exeTime": 7
+    }
+  ],
+
+  "groupCredits": [
+    600, 300
+  ],
+  "vcpuCredits": [
+    256,
+    512,
+    256,
+    500,
+    200
+  ]
+}
