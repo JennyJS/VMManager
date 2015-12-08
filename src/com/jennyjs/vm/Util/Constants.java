@@ -11,4 +11,5 @@ public class Constants {
     public static int PCPU_NUMBER = 5;
     public static int IO_TASK_PROCESSING_TIME = 20;
     public static int TASK_GENERATING_INTERVAL = 1;
+    public static int CLUSTER_NUMBER = 3;
 }

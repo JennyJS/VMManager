@@ -44,8 +44,7 @@ public class VirtualCPU {
         this.task = task;
         this.clusterId = task.groupID;
         this.isBusy = true;
-//        this.credit = Math.round(parseResult.grpCredits.get(this.clusterId-1) * this.weight / parseResult.vmsTotalVcpuWt.get(this.vmId));
-        this.credit = 100;
+        this.credit = Math.round(parseResult.grpCredits.get(this.clusterId-1) * this.weight / parseResult.vmsTotalVcpuWt.get(this.vmId));
         this.p = Priority.over;
         System.out.println("Loading task " + task.taskID + " to vCPU " + this.vCpuId);
 
