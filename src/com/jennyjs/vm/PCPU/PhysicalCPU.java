@@ -40,7 +40,7 @@ public class PhysicalCPU implements Runnable{
 
         if(CompletedTaskCount >= virtualCPU.parseResult.numTasks){
             System.setOut(ParseResult.stdout);
-            System.out.println("----- Completed Processing All Tasks in the Input File [ Total Tasks Executed : "+virtualCPU.parseResult.numTasks + "ms ] ------");
+            System.out.println("----- Completed Processing All Tasks in the Input File [ Total Tasks Executed : "+virtualCPU.parseResult.numTasks + " ] ------");
             System.exit(0);
         }
         PCPUManager.getInstance().addPCUP(this);
