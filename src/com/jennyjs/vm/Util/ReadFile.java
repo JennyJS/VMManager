@@ -39,7 +39,7 @@ public class ReadFile {
         numVcpu = vCpulst.size();
         JSONArray groupLst = (JSONArray)jsonObject.get("groupCredits");
         numGroups = groupLst.size();
-        JSONArray taskArr = (JSONArray)jsonObject.get("tasks");
+        JSONArray taskArr = (JSONArray)jsonObject.get("groups");
         type = VCPUManager.ScheduleType.mapFromString((String) jsonObject.get("algo"));
 
 
@@ -55,11 +55,14 @@ public class ReadFile {
         for (Object aTaskArr : taskArr) {
             JSONObject task = (JSONObject) aTaskArr;
             //long totalTime, TaskType taskType, int taskID, int groupID
-            taskInfo.add(new Task(
-                    ((Number) task.get("exeTime")).intValue(),
-                    Task.TaskType.mapFromString((String) task.get("type")),
-                    taskId++,
-                    ((Number) task.get("groupId")).intValue()));
+            int numOftasks = ((Number) task.get("tasksNum")).intValue();
+            for (int i = 0; i < numOftasks; i++){
+                taskInfo.add(new Task(
+                        ((Number) task.get("exeTime")).intValue(),
+                        Task.TaskType.mapFromString((String) task.get("type")),
+                        taskId++,
+                        ((Number) task.get("groupId")).intValue()));
+            }
         }
         numTasks = taskInfo.size();
 

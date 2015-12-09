@@ -22,7 +22,7 @@ public class TaskGenerator implements Runnable {
             try {
                 Thread.sleep(Constants.TASK_GENERATING_INTERVAL);
                 TaskQueue.getInstance().addTask(task);
-                System.out.println("Generating..." + task);
+//                System.out.println("Generating..." + task);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

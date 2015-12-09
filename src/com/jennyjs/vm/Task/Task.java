@@ -28,8 +28,6 @@ public class Task {
             return priority;
         }
 
-
-
         public static TaskType mapFromString(String str){
             for (TaskType taskType : values()) {
                 if (taskType.name().equals(str)) {

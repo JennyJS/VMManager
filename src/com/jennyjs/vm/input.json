@@ -1,41 +1,8 @@
 {
   "algo": "CREDIT",
   "numVM": 4,
-  "tasks" : [
-    {
-      "groupId" : 1, "type": "IoTask", "exeTime": 5
-    },
-    {
-      "groupId" : 1, "type": "NonIoTask", "exeTime": 1
-    },
-    {
-      "groupId" : 1, "type": "IoTask", "exeTime":6
-    },
-    {
-      "groupId" : 2, "type": "NonIoTask", "exeTime": 2
-    },
-    {
-      "groupId" : 2, "type": "IoTask", "exeTime": 7
-    },
-    {
-      "groupId" : 2, "type": "NonIoTask", "exeTime": 3
-    },
-    {
-      "groupId" : 3, "type": "IoTask", "exeTime":8
-    },
-    {
-      "groupId" : 3, "type": "NonIoTask", "exeTime": 4
-    },
-    {
-      "groupId" : 3, "type": "IoTask", "exeTime": 9
-    },
-    {
-      "groupId" : 3, "type": "NonIoTask", "exeTime": 5
-    }
-  ],
-
   "groupCredits": [
-    600, 300, 400
+    600, 300, 400, 500
   ],
   "vcpuCredits": [
     256,
@@ -48,5 +15,31 @@
     500,
     300,
     500
+    ],
+  "groups" : [
+    {
+      "groupId" : 1,
+      "tasksNum" : 300,
+      "exeTime" : 10,
+      "type" : "IoTask"
+    },
+    {
+      "groupId" : 2,
+      "tasksNum" : 300,
+      "exeTime" : 9,
+      "type" : "NonIoTask"
+    },
+    {
+      "groupId" : 3,
+      "tasksNum" : 300,
+      "exeTime" : 8,
+      "type" : "IoTask"
+    },
+    {
+      "groupId" : 4,
+      "tasksNum" : 300,
+      "exeTime" : 7,
+      "type" : "NonIoTask"
+    }
   ]
 }
