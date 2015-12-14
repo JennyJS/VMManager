@@ -2,7 +2,6 @@ package com.jennyjs.vm.PCPU;
 
 import com.jennyjs.vm.ScheduleAlgorithm.VCPUScheduler;
 import com.jennyjs.vm.Util.Constants;
-import com.jennyjs.vm.Util.ParseResult;
 import com.jennyjs.vm.VCPU.VCPUManager;
 import com.jennyjs.vm.VCPU.VirtualCPU;
 
@@ -13,10 +12,10 @@ public class PhysicalCPU implements Runnable{
 
     final int pCPUId;
     public Status status;
-    private static int[] clusters = new int[Constants.CLUSTER_NUMBER];
+    private static final int[] clusters = new int[Constants.CLUSTER_NUMBER];
 
     private VirtualCPU virtualCPU;
-    public static int completedTaskCount = 0;
+    private static int completedTaskCount = 0;
 
     @Override
     public void run() {
@@ -39,9 +38,9 @@ public class PhysicalCPU implements Runnable{
             VCPUScheduler.getInstance().addVcpu(virtualCPU);
         }
 
-        if(getCompletedTaskCount() >= virtualCPU.parseResult.numTasks){
-            System.setOut(ParseResult.stdout);
-            System.out.println("----- Completed Processing All Tasks in the Input File [ Total Tasks Executed : " + virtualCPU.parseResult.numTasks + " ] ------");
+        if(getCompletedTaskCount() >= VirtualCPU.parseResult.getNumTasks()){
+            System.setOut(System.out);
+            System.out.println("----- Completed Processing All Tasks in the Input File [ Total Tasks Executed : " + VirtualCPU.parseResult.getNumTasks() + " ] ------");
             for (int i = 0; i < clusters.length; i++){
                 System.out.println("All Tasks in Group " + (i + 1) + " total finish time is  " + clusters[i]);
             }
@@ -53,7 +52,9 @@ public class PhysicalCPU implements Runnable{
     public enum Status{
         busy(0),
         idle(1);
-        private int level;
+
+        private final int level;
+
         Status(int l){
             this.level = l;
         }

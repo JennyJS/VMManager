@@ -25,7 +25,7 @@ public class Dom0Manager extends Thread {
             try {
                 virtualCPU = Dom0Queue.getInstance().take();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
                 return;
             }
 

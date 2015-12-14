@@ -1,6 +1,8 @@
 package com.jennyjs.vm.Task;
-
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jenny on 11/14/15.
@@ -13,15 +15,28 @@ public class Task {
     public final TaskType taskType;
     public final long createdTime;
     public long TotalExecutionTime;
-    final long totalTime;
+    private final long totalTime;
     long executedTime;
 
     public enum TaskType{
         IoTask(1),
         NonIoTask(0);
+
         private final int priority;
-        TaskType(int i){
-            this.priority = i;
+
+        private static final Map<String, TaskType> typeByName;
+
+        static {
+            Map<String, TaskType> tmpMap = new HashMap<>();
+            for (TaskType taskType : values()){
+                tmpMap.put(taskType.name(), taskType);
+            }
+
+            typeByName = Collections.unmodifiableMap(tmpMap);
+        }
+
+        TaskType(int priority){
+            this.priority = priority;
         }
 
         public int getPriority(){
@@ -29,13 +44,8 @@ public class Task {
         }
 
         public static TaskType mapFromString(String str){
-            for (TaskType taskType : values()) {
-                if (taskType.name().equals(str)) {
-                    return taskType;
-                }
-            }
 
-            return null;
+            return typeByName.get(str);
         }
     }
 

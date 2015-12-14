@@ -10,21 +10,20 @@ import java.util.List;
 
 
 public class TaskGenerator implements Runnable {
-    //private final int taskNum;
     private final List<Task> list;
 
     public TaskGenerator(final List<Task> list) {
         this.list = list;
     }
+
     @Override
     public void run() {
-        for(Task task : list) {
+        for (Task task : list) {
             try {
                 Thread.sleep(Constants.TASK_GENERATING_INTERVAL);
                 TaskQueue.getInstance().addTask(task);
-//                System.out.println("Generating..." + task);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
     }

@@ -20,7 +20,7 @@ import java.net.URL;
 /**
  * Created by jenny on 11/14/15.
  */
-public class Main {
+class Main {
 
     public static void main(String[] args) throws InterruptedException {
         final ParseResult parseResult;
@@ -33,23 +33,23 @@ public class Main {
         }
 
         try {
-            ParseResult.stdout = System.out;
-            System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("output_" + System.currentTimeMillis() + "_" + parseResult.type.name() + ".txt")), true));
+            System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("output_" + System.currentTimeMillis() + "_" + parseResult.getType().name() + ".txt")), true));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return;
         }
 
         VirtualCPU.parseResult = parseResult;
 
-        final Thread taskGeneratorThread = new Thread(new TaskGenerator(parseResult.tasks));
+        final Thread taskGeneratorThread = new Thread(new TaskGenerator(parseResult.getTasks()));
         taskGeneratorThread.run();
 
         //load task to VCPU, put the VCPUs into the run queue and sort based on MRG
-        for (VirtualCPU virtualCPU : parseResult.virtualCPUs) {
+        for (VirtualCPU virtualCPU : parseResult.getVirtualCPUs()) {
             VCPUManager.VCPUConnectorQueue.getInstance().add(virtualCPU);
         }
 
-        VCPUManager.init(parseResult.type);
+        VCPUManager.init(parseResult.getType());
         Dom0Manager.getInstance().start();
         VCPUManager.getInstance().start();
 

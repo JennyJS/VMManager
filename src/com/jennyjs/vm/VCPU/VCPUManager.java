@@ -7,8 +7,10 @@ import com.jennyjs.vm.Task.Task;
 import com.jennyjs.vm.Task.TaskQueue;
 
 
-
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -27,7 +29,7 @@ public class VCPUManager extends Thread {
         MRG(new MRGComparator()),
         CREDIT(new CreditComparator());
 
-        private Comparator<VirtualCPU> comparator;
+        private final Comparator<VirtualCPU> comparator;
 
         ScheduleType(Comparator<VirtualCPU> comparator){
             this.comparator = comparator;
@@ -37,17 +39,19 @@ public class VCPUManager extends Thread {
             return this.comparator;
         }
 
-        public static ScheduleType mapFromString(String str){
-            for (ScheduleType scheduleType : values()) {
-                if (scheduleType.name().equals(str)) {
-                    return scheduleType;
-                }
-            }
+        private static final Map<String, ScheduleType> typeByName;
 
-            return null;
+        static {
+            Map<String, ScheduleType> tmpMap = new HashMap<>();
+            for (ScheduleType scheduleType : values()){
+                tmpMap.put(scheduleType.name(), scheduleType);
+            }
+            typeByName = Collections.unmodifiableMap(tmpMap);
         }
 
-
+        public static ScheduleType mapFromString(String str){
+            return typeByName.get(str);
+        }
     }
 
     private static VCPUManager vcpuManager;

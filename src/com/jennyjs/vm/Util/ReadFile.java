@@ -92,6 +92,6 @@ public class ReadFile {
             vCpuId++;
         }
 
-        return new ParseResult(numTasks, numVms, numVcpu, numGroups, grpCredits, vcpuCredits, vmsTotalVcpuWt, taskInfo, vcpus,type);
+        return new ParseResult(numTasks, grpCredits, vmsTotalVcpuWt, taskInfo, vcpus,type);
     }
 }
